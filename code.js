@@ -3,10 +3,12 @@ var maxNum = 9;
 	var multiplyMode = 1;
 	var currentScore = 0;
 	var maxScore = 0;
-	var scoreGoal = 100;
+	var scoreGoal = 50;
 	var corrects = 0;
 	var incorrects = 0;
 	var res = 0;
+	
+	
 $().ready(function() {
 	
 	
@@ -27,6 +29,10 @@ $().ready(function() {
 		maxNum = Number(document.getElementById("settingsMaxNumber").value);
 		multiplyMode = Number(document.getElementById("settingsMultiplyMode").value);
 		scoreGoal = Number(document.getElementById("settingsScoreGoal").value);
+		if(Number.isInteger(scoreGoal)==false || scoreGoal == "") {
+			scoreGoal = 50;
+			console.log("scoreGoal set to 50");
+		} 
 		console.log(maxNum + " and " + multiplyMode);
 		gameStart(maxNum, multiplyMode);
 		return maxNum, multiplyMode;
@@ -47,6 +53,11 @@ $().ready(function() {
 			//checkAnswer(res);
 			answerInput.focus();
 			answerInput.value = "";
+			if(currentScore >= scoreGoal) {
+				$('#winModal').modal('show');
+				$('#winInformerModal').html(renderResultsAtFinish());
+			}
+			console.log(scoreGoal);
 		}
 		
 	});
@@ -64,12 +75,21 @@ $().ready(function() {
 		maxNum = document.getElementById("settingsMaxNumberModal").value;
 		multiplyMode = document.getElementById("settingsMultiplyModeModal").value;
 		scoreGoal = document.getElementById("settingsScoreGoalModal").value;
+		if(Number.isInteger(scoreGoal)==false || scoreGoal == "") {
+			scoreGoal = 50;
+			console.log("scoreGoal set to 50");
+		}
 		console.log(maxNum + " and " + multiplyMode);
 		res = renderTask(maxNum, multiplyMode);
 		answerInput.focus();
 		answerInput.value = "";
 	});
 	
+	//Обработчик кнопки "Новая тренировка в модальном окне завершения тренировки"
+	let newGameModal = document.getElementById("newGameModal");
+	newGameModal.addEventListener('click', function(){
+		gameReset();
+	});
 	//let res = renderTask(maxNum, multiplyMode);
 	//console.log(res);
 });
@@ -143,6 +163,12 @@ function incorrectAnswer() {
 }
 
 function gameReset() {
+	currentScore = 0;
+	maxScore = 0;
+	scoreGoal = 100;
+	corrects = 0;
+	incorrects = 0;
+	res = 0;
 	$("#mainRow").hide(500);
 	$("#settingsRow").hide(500);
 	$("#alertSuccess").hide();
@@ -164,4 +190,13 @@ function renderResults(isSuccess){
 		+ incorrects + " | Набрано очков: " 
 		+ currentScore + "/" 
 		+ scoreGoal + "</p>";
+}
+
+function renderResultsAtFinish() {
+	let eff = Math.floor(corrects/(corrects + incorrects)*100);
+	return results = "<h3>Ты молодец!</h3>"
+	+ "<p>Набрано очков: " + currentScore + "</p>"
+	+ "<p>Правильных ответов: " + corrects + "</p>"
+	+ "<p>неправильных ответов: " + incorrects + "</p>"
+	+ "<p>Результативность : " + eff + "%</p>";
 }
