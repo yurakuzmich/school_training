@@ -1,0 +1,174 @@
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Тренировка устного счета</title>
+  </head>
+  <body>
+
+<!--Модальное окно с настройками-->
+<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Настройки тренажера таблицы умножения</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="settingsMaxNumberModal">Число</label>
+						<select class="form-control" id="settingsMaxNumberModal">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="settingsMultiplyModeModal">Режим работы</label>
+						<select class="form-control" id="settingsMultiplyModeModal">
+							<option value="1">Примеры только на выбранное число</option>
+							<option value="2">Примеры на все числа от 1 до выбранного</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="settingsScoreGoalModal">Сколько очков нужно набрать для победы</label>
+						<input type = "text" class="form-control" id="settingsScoreGoalModal">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="settingsSave" class="btn btn-primary" data-dismiss="modal">Сохранить настройки</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Конец модального окна с настройками-->
+
+
+
+<!--Модальное окно с завершением игры-->
+<div class="modal fade" id="winModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Тренировка окончена</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				Поздравляю!!!!
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="newgameModal" class="btn btn-primary" data-dismiss="modal">Новая тренировка</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Конец модального окна с завершением игры-->
+
+
+
+  
+  
+<!--Начало тела страницы-->
+  
+	<div class="container">
+		
+		<div class="row">
+			<div class="col">
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col">
+				<h2>Тренажер таблицы умножения</h2>
+				<hr>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col">
+				<div id="alertSuccess" class="alert alert-success"></div>
+			</div>
+		</div>
+		
+		<div class="row" id="startRow">
+			<div class="col">
+				<form>
+					<div class="form-group">
+						<label for="settingsMaxNumber">Число</label>
+						<select class="form-control" id="settingsMaxNumber">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="settingsMultiplyMode">Режим работы</label>
+						<select class="form-control" id="settingsMultiplyMode">
+							<option value="1">Примеры только на выбранное число</option>
+							<option value="2">Примеры на все числа от 1 до выбранного</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="settingsScoreGoal">Сколько очков нужно набрать для победы</label>
+						<input type = "text" class="form-control" id="settingsScoreGoal">
+					</div>
+				</form>
+				<button type="button" id="startButton" class="btn btn-success">Начать</button>
+				<hr>
+				
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col" id="mainRow">
+				<div id="taskField"></div>
+				<form action="#">
+					<div class="form-group">
+						<input type="text" id="answerInput" class="form-control form-control-lg" placeholder="Ответ">
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		<div class="row" id="settingsRow">
+			<div class="col">
+				<hr>
+				<button type="button" id="resetButton" class="btn btn-danger">СБРОС</button>
+				<button type="button" id="settingsButton" class="btn btn-info" data-toggle="modal" data-target="#settingsModal">НАСТРОЙКИ</button>
+			</div>
+		</div>
+	</div>
+<!--Конец тела страницы-->
+	
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	 <script src="code.js"></script>
+  </body>
+</html>
