@@ -22,7 +22,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form>
+				<form action="#">
 					<div class="form-group">
 						<label for="settingsMaxNumberModal">Число</label>
 						<select class="form-control" id="settingsMaxNumberModal">
@@ -107,7 +107,7 @@
 		
 		<div class="row" id="startRow">
 			<div class="col">
-				<form>
+				<form action="#">
 					<div class="form-group">
 						<label for="settingsMaxNumber">Число</label>
 						<select class="form-control" id="settingsMaxNumber">
@@ -143,9 +143,14 @@
 		<div class="row">
 			<div class="col" id="mainRow">
 				<div id="taskField"></div>
-				<form action="#">
-					<div class="form-group">
-						<input type="text" id="answerInput" class="form-control form-control-lg" placeholder="Ответ">
+				<form action="#" onsubmit="return false;">
+					<div class="form-row">
+						<div class="col">
+							<input type="number" id="answerInput" class="form-control form-control-lg" placeholder="Ответ">
+						</div>
+						<div class="col">
+							<button type="button" id="submitButton" class="btn btn-info">Ответ!</button>
+						</div>
 					</div>
 				</form>
 			</div>
@@ -155,7 +160,7 @@
 			<div class="col">
 				<hr>
 				<button type="button" id="resetButton" class="btn btn-danger">СБРОС</button>
-				<button type="button" id="settingsButton" class="btn btn-info" data-toggle="modal" data-target="#settingsModal">НАСТРОЙКИ</button>
+				<!--<button type="button" id="settingsButton" class="btn btn-info" data-toggle="modal" data-target="#settingsModal">НАСТРОЙКИ</button>-->
 			</div>
 		</div>
 	</div>

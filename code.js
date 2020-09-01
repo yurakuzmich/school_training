@@ -35,6 +35,8 @@ $().ready(function() {
 		} 
 		console.log(maxNum + " and " + multiplyMode);
 		gameStart(maxNum, multiplyMode);
+		answerInput.value = "";
+		answerInput.focus();
 		return maxNum, multiplyMode;
 	});
 	console.log(maxNum + " and " + multiplyMode);
@@ -57,9 +59,25 @@ $().ready(function() {
 				$('#winModal').modal('show');
 				$('#winInformerModal').html(renderResultsAtFinish());
 			}
-			console.log(scoreGoal);
+			//console.log(scoreGoal);
 		}
 		
+	});
+	
+	//Обработчик Кнопки "Ответ"
+	let submitButton = document.getElementById("submitButton");
+	submitButton.addEventListener('click', function(){
+		let ans = Number(answerInput.value);
+			checkAnswer(ans);
+			res = renderTask(maxNum, multiplyMode);
+			//console.log(res);
+			//checkAnswer(res);
+			answerInput.focus();
+			answerInput.value = "";
+			if(currentScore >= scoreGoal) {
+				$('#winModal').modal('show');
+				$('#winInformerModal').html(renderResultsAtFinish());
+			}
 	});
 	
 	//Обработчик кнопки Сброс
@@ -75,7 +93,8 @@ $().ready(function() {
 		maxNum = document.getElementById("settingsMaxNumberModal").value;
 		multiplyMode = document.getElementById("settingsMultiplyModeModal").value;
 		scoreGoal = document.getElementById("settingsScoreGoalModal").value;
-		if(Number.isInteger(scoreGoal)==false || scoreGoal == "") {
+		console.log("scoreGoal is " + scoreGoal);
+		if(Number.isInteger(scoreGoal) === false || scoreGoal === "") {
 			scoreGoal = 50;
 			console.log("scoreGoal set to 50");
 		}
@@ -118,13 +137,13 @@ function gameStart(maxNum, multiplyMode) {
 	$("#startRow").hide(500);
 	$("#mainRow").show(600);
 	$("#settingsRow").show(600);
-	answerInput.value = "";
-	answerInput.focus();
 	res = renderTask(maxNum, multiplyMode);
 	//console.log(res);
 	$("#alertSuccess").show();
 	$("#alertSuccess").html("<h3>Поехали!</h3>");
 	$("#recordButton").show();
+	answerInput.value = "";
+	answerInput.focus();
 	return res;
 }
 
