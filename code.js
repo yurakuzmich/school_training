@@ -48,7 +48,7 @@ $().ready(function() {
 		//console.log(event.code);
 		if(event.code == 'Enter') {
 			//alert("Enter pressed");
-			let ans = Number(answerInput.value);
+			let ans = answerInput.value;
 			checkAnswer(ans);
 			res = renderTask(maxNum, multiplyMode);
 			//console.log(res);
