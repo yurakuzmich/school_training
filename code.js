@@ -26,9 +26,9 @@ $().ready(function() {
 	//Обработчик кнопки начала тренировки
 	let startButton = document.getElementById("startButton");
 	startButton.addEventListener('click', function(event){
-		maxNum = document.getElementById("settingsMaxNumber").value;
-		multiplyMode = document.getElementById("settingsMultiplyMode").value;
-		scoreGoal = document.getElementById("settingsScoreGoal").value;
+		maxNum = Number(document.getElementById("settingsMaxNumber").value);
+		multiplyMode = Number(document.getElementById("settingsMultiplyMode").value);
+		scoreGoal = Number(document.getElementById("settingsScoreGoal").value);
 		if(Number.isInteger(scoreGoal)==false || scoreGoal == "") {
 			scoreGoal = 50;
 			console.log("scoreGoal set to 50");
@@ -48,7 +48,7 @@ $().ready(function() {
 		//console.log(event.code);
 		if(event.code == 'Enter') {
 			//alert("Enter pressed");
-			let ans = answerInput.value;
+			let ans = Number(answerInput.value);
 			checkAnswer(ans);
 			res = renderTask(maxNum, multiplyMode);
 			//console.log(res);
@@ -67,7 +67,7 @@ $().ready(function() {
 	//Обработчик Кнопки "Ответ"
 	let submitButton = document.getElementById("submitButton");
 	submitButton.addEventListener('click', function(){
-		let ans = answerInput.value;
+		let ans = Number(answerInput.value);
 			checkAnswer(ans);
 			res = renderTask(maxNum, multiplyMode);
 			//console.log(res);
